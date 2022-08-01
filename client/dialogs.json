@@ -1,0 +1,67 @@
+{
+  "dialogs": [
+    {
+      "_id": "62e68df1b07660f28ad5628b",
+      "text": "Tempor enim exercitation cillum occaecat. Aute laboris incididunt est nulla velit ipsum sunt qui elit. Occaecat commodo enim culpa deserunt.",
+      "created_at": 1659102430706,
+      "user": {
+        "_id": "62e68df1b07660f28ad5628b",
+        "fullName": "Дима Матюшкин",
+        "avatar": "/dima.jpg"
+      }
+    },
+    {
+      "_id": "62e68df1d07660f28ad5628b",
+      "text": "Tempor enim exercitation cillum occaecat. Aute laboris incididunt est nulla velit ipsum sunt qui elit. Occaecat commodo enim culpa deserunt.",
+      "created_at": 1659102430706,
+      "user": {
+        "_id": "62e68df1d07660f28ad5628b",
+        "fullName": "Andrey Azyabin",
+        "avatar": null
+      }
+    },
+    {
+      "_id": "83f68df1b07660f28ad5628b",
+      "text": "Tempor enim exercitation cillum occaecat. Aute laboris incididunt est nulla velit ipsum sunt qui elit. Occaecat commodo enim culpa deserunt.",
+      "created_at": 1659302430706,
+      "user": {
+        "_id": "83f68df1b07660f28ad5628b",
+        "fullName": "Qlarissa Lara",
+        "avatar": null
+      }
+    },
+    {
+      "_id": "7ff68df1b07660f28ad5628b",
+      "text": "Tempor enim exercitation cillum occaecat. Aute laboris incididunt est nulla velit ipsum sunt qui elit. Occaecat commodo enim culpa deserunt.",
+      "created_at": 1659102430706,
+      "user": {
+        "_id": "7ff68df1b07660f28ad5628b",
+        "fullName": "Tlarissa Lara",
+        "avatar": null
+      }
+    },
+    {
+      "_id": "qw168df1b07660f28ad5628b",
+      "text": "Tempor enim exercitation cillum occaecat. Aute laboris incididunt est nulla velit ipsum sunt qui elit. Occaecat commodo enim culpa deserunt.",
+      "created_at": 1659102430706,
+      "user": {
+        "_id": "qw168df1b07660f28ad5628b",
+        "fullName": "Hlarissa Lara",
+        "avatar": null
+      }
+    },
+    {
+      "_id": "zx2e68df1b07660f28ad5628b",
+      "text": "Tempor enim exercitation cillum occaecat. Aute laboris incididunt est nulla velit ipsum sunt qui elit. Occaecat commodo enim culpa deserunt.",
+      "created_at": 1659102430706,
+      "user": {
+        "_id": "zx2e68df1b07660f28ad5628b",
+        "fullName": "Clarissa Lara",
+        "avatar": null
+      }
+    }
+  ],
+  "messages": [
+
+  ]
+}

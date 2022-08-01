@@ -29,27 +29,9 @@ export const SidebarIconEdit = styled.div`
     opacity: 1;
   }
 `;
-export const SidebarSearch = styled.div`
-  position: relative;
-  padding: 5px 20px 5px 20px;
-  background-color: rgba(217, 217, 217, 0.4);
-`;
-export const SidebarInput = styled.input`
-  width: 100%;
-  outline: none;
-  padding: 6px 11px 6px 40px;
-  height: 38px;
-  border-radius: 6px;
-  border: 0;
-  background-color: #f7f8f9;
-  ::placeholder {
-    opacity: 0.5;
-    font-size: 14px;
-  }
-`;
 export const SidebarDialogs = styled.div`
   overflow: auto;
-  height: calc(100% - 115px);
+  height: calc(100% - 66px);
 
   ::-webkit-scrollbar {
     width: 5px;
