@@ -7,7 +7,7 @@ export const GlobalCommonStyles: any = () => (
       *::before,
       *::after {
         box-sizing: border-box;
-        font-family: "Montserrat", Arial, "sans-serif";
+        font-family: "Asap", sans-serif;
       }
       #__next {
       }
@@ -18,7 +18,7 @@ export const GlobalCommonStyles: any = () => (
       }
 
       body {
-        font-family: "Montserrat", Arial, "sans-serif";
+        font-family: "Asap", sans-serif;
         font-size: 16px;
         background-color: #f4f7fd;
         color: #202020;
@@ -26,7 +26,7 @@ export const GlobalCommonStyles: any = () => (
       }
 
       input {
-        font-family: "Montserrat-Regular", Arial, "sans-serif";
+        font-family: "Asap", sans-serif;
       }
 
       a {

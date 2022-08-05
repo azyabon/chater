@@ -5,6 +5,10 @@ import Time from "../Time";
 import MessageStatus from "../MessageStatus";
 import Wave from "../../assets/svg/Wave/Wave";
 import convertAudioTime from "../../utils/convert-audio-time";
+import Avatar from "../Avatar";
+// @ts-ignore
+import { Emoji } from "emoji-mart";
+import reactStringReplace from "react-string-replace";
 
 type Props = {
   avatar: string;
@@ -51,19 +55,21 @@ const Message: FC<Props> = ({
         isMe={isMe}
         image={attachments?.length === 1 && text === null}
       >
-        <Image
-          src={avatar}
-          alt={`Avatar`}
-          width={33}
-          height={33}
-          style={{ borderRadius: "50px" }}
-        />
+        <Avatar user={user} isMessage={true} />
       </S.MessageAvatar>
       <S.MessageContent isMe={isMe}>
         <div>
           {(audio || text || isTyping) && (
+            // https://www.youtube.com/watch?v=4lMbguyj5KQ&list=PL0FGkDGJQjJFDr8R3D6dFVa1nhce_2-ly&index=9&ab_channel=ArchakovBlog : 2 49 58
             <S.MessageBubble isMe={isMe} isAudio={!!audio}>
-              {text && <S.MessageText isMe={isMe}>{text}</S.MessageText>}
+              {/*<S.MessageText isMe={isMe}>{text}</S.MessageText>*/}
+              {text && (
+                <S.MessageText isMe={isMe}>
+                  {reactStringReplace(text, /:(.+?):/g, (match, i) => (
+                    <Emoji key={i} emoji={match} size={16} />
+                  ))}
+                </S.MessageText>
+              )}
               {isTyping ? (
                 <S.MessageTyping>
                   <S.MessageDot />

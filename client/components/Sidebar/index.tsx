@@ -2,8 +2,6 @@ import * as S from "./Sidebar.styled";
 import Image from "next/image";
 import DialogsFilter from "../../containers/DialogsFilter";
 
-import dialogsJson from "../../dialogs.json";
-
 const Sidebar = () => {
   return (
     <S.Sidebar>
@@ -19,7 +17,7 @@ const Sidebar = () => {
         </S.SidebarIconEdit>
       </S.SidebarHeader>
       <S.SidebarDialogs>
-        <DialogsFilter userId={0} items={dialogsJson.dialogs} />
+        <DialogsFilter userId={0} items />
       </S.SidebarDialogs>
     </S.Sidebar>
   );

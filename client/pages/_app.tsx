@@ -1,11 +1,15 @@
 import type { AppProps } from "next/app";
 import { CommonStyledWrap } from "../styled";
+import { Provider } from "react-redux";
+import store from "../store/store";
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (
-    <CommonStyledWrap>
-      <Component {...pageProps} />
-    </CommonStyledWrap>
+    <Provider store={store}>
+      <CommonStyledWrap>
+        <Component {...pageProps} />
+      </CommonStyledWrap>
+    </Provider>
   );
 }
 

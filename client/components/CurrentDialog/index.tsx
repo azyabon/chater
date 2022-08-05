@@ -1,9 +1,11 @@
 import * as S from "./CurrentDialog.styled";
 import Image from "next/image";
 import ChatInput from "../ChatInput";
-import Messages from "../Messages";
+import MessagesContainer from "../../containers/MessagesContainer";
+import { useRef } from "react";
 
 const CurrentDialog = () => {
+  const messagesCurrentDialogRef = useRef(null);
   return (
     <S.CurrentDialog>
       <S.CurrentDialogHeader>
@@ -19,8 +21,8 @@ const CurrentDialog = () => {
           <Image src={"/option.png"} width={20} height={20} />
         </div>
       </S.CurrentDialogHeader>
-      <S.CurrentDialogChat>
-        <Messages items={[]}></Messages>
+      <S.CurrentDialogChat ref={messagesCurrentDialogRef}>
+        <MessagesContainer scroll={messagesCurrentDialogRef} />
       </S.CurrentDialogChat>
       <ChatInput />
     </S.CurrentDialog>

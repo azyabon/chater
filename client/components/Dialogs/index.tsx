@@ -9,9 +9,18 @@ type Props = {
   userId?: number;
   onSearch: any;
   inputValue: string;
+  onSelectDialog: any;
+  currentDialogId: string | number;
 };
 
-const Dialogs: FC<Props> = ({ items, userId, onSearch, inputValue }) => {
+const Dialogs: FC<Props> = ({
+  items,
+  userId,
+  onSearch,
+  inputValue,
+  onSelectDialog,
+  currentDialogId,
+}) => {
   return (
     <S.Dialogs>
       <S.DialogsSearch>
@@ -31,16 +40,21 @@ const Dialogs: FC<Props> = ({ items, userId, onSearch, inputValue }) => {
         ></S.DialogsInput>
       </S.DialogsSearch>
       {items.length ? (
-        orderBy(items, ["created_at"], ["desc"]).map((item) => (
-          <Dialog
-            key={item.user._id}
-            user={item.user}
-            message={item}
-            unRead={0}
-            isMe={item.user._id === userId}
-            isRead={item.isRead}
-          />
-        ))
+        orderBy(items, ["created_at"], ["desc"]).map((item) => {
+          return (
+            <Dialog
+              _id={item._id}
+              onSelect={onSelectDialog}
+              key={item.user._id}
+              user={item.user}
+              message={item}
+              unRead={0}
+              isMe={item.user._id === userId}
+              isRead={item.isRead}
+              currentDialogId={currentDialogId}
+            />
+          );
+        })
       ) : (
         <S.NoDialogs>
           <Image src={"/nodata.png"} alt={"nodata"} width={64} height={64} />

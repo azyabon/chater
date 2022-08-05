@@ -10,6 +10,9 @@ type Props = {
   unRead: number;
   isMe: boolean;
   isRead: boolean;
+  onSelect: any;
+  _id: string | number;
+  currentDialogId: number | string;
 };
 
 const getMessageTime = (created_at: any) => {
@@ -21,9 +24,18 @@ const getMessageTime = (created_at: any) => {
   return format(created_at, "dd/MM/yyyy");
 };
 
-const Dialog: FC<Props> = ({ user, message, unRead, isMe, isRead }) => {
+const Dialog: FC<Props> = ({
+  user,
+  message,
+  unRead,
+  isMe,
+  isRead,
+  onSelect,
+  _id,
+  currentDialogId,
+}) => {
   return (
-    <S.Dialog>
+    <S.Dialog onClick={() => onSelect(_id)} active={currentDialogId === _id}>
       <S.DialogAvatar online={user.isOnline}>
         <Avatar user={user} />
       </S.DialogAvatar>

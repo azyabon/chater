@@ -2,172 +2,43 @@ import * as S from "./Messages.styled";
 import { FC } from "react";
 import Image from "next/image";
 import Message from "../Message";
+import { ThreeCircles } from "react-loader-spinner";
 
 type Props = {
   items?: any;
+  isLoading: boolean;
 };
 
-const Messages: FC<Props> = ({ items }) => {
-  return items.length ? (
+const Messages: FC<Props> = ({ items, isLoading }) => {
+  return (
     <S.Messages>
-      {" "}
-      <Message
-        avatar={"/dima.jpg"}
-        text={null}
-        date={1659102430706}
-        isMe={false}
-        isRead={false}
-        isTyping={false}
-        audio="https://notificationsounds.com/storage/sounds/file-sounds-1152-swinging.ogg"
-      />
-      <Message
-        avatar={"/andrey.jpg"}
-        text={
-          "Салам, Брут! Салам, Брут! Салам, Брут! Салам, Брут! Салам, Брут! Салам, Брут!"
-        }
-        date={1659102430706}
-        isMe={true}
-        isRead={true}
-        attachments={[
-          {
-            filename: "image.jpg",
-            url: "/andrey.jpg",
-          },
-          {
-            filename: "image.jpg",
-            url: "/dima.jpg",
-          },
-        ]}
-        isTyping={false}
-      />
-      <Message
-        avatar={"/andrey.jpg"}
-        text={
-          "Салам, Брут! Салам, Брут! Салам, Брут! Салам, Брут! Салам, Брут! Салам, Брут!"
-        }
-        date={1659102430706}
-        isMe={true}
-        isRead={true}
-        isTyping={false}
-      />
-      <Message
-        avatar={"/andrey.jpg"}
-        text={
-          "Салам, Брут! Салам, Брут! Салам, Брут! Салам, Брут! Салам, Брут! Салам, Брут!"
-        }
-        date={1659102430706}
-        isMe={true}
-        isRead={true}
-        isTyping={false}
-      />
-      <Message
-        avatar={"/andrey.jpg"}
-        text={
-          "Салам, Брут! Салам, Брут! Салам, Брут! Салам, Брут! Салам, Брут! Салам, Брут!"
-        }
-        date={1659102430706}
-        isMe={true}
-        isRead={true}
-        isTyping={false}
-      />
-      <Message
-        avatar={"/andrey.jpg"}
-        text={
-          "Салам, Брут! Салам, Брут! Салам, Брут! Салам, Брут! Салам, Брут! Салам, Брут!"
-        }
-        date={1659102430706}
-        isMe={true}
-        isRead={true}
-        isTyping={false}
-      />
-      <Message
-        avatar={"/andrey.jpg"}
-        text={
-          "Салам, Брут! Салам, Брут! Салам, Брут! Салам, Брут! Салам, Брут! Салам, Брут!"
-        }
-        date={1659102430706}
-        isMe={true}
-        isRead={true}
-        isTyping={false}
-      />
-      <Message
-        avatar={"/andrey.jpg"}
-        text={
-          "Салам, Брут! Салам, Брут! Салам, Брут! Салам, Брут! Салам, Брут! Салам, Брут!"
-        }
-        date={1659102430706}
-        isMe={true}
-        isRead={true}
-        isTyping={false}
-      />
-      <Message
-        avatar={"/andrey.jpg"}
-        text={
-          "Салам, Брут! Салам, Брут! Салам, Брут! Салам, Брут! Салам, Брут! Салам, Брут!"
-        }
-        date={1659102430706}
-        isMe={true}
-        isRead={true}
-        isTyping={false}
-      />
-      <Message
-        avatar={"/dima.jpg"}
-        text={"Салам, Брут!"}
-        date={1658002130706}
-        isMe={false}
-        isRead={false}
-        isTyping={false}
-      />
-      <Message
-        avatar={"/dima.jpg"}
-        text={null}
-        date={null}
-        isMe={false}
-        isRead={false}
-        attachments={[
-          {
-            filename: "image.jpg",
-            url: "/dima.jpg",
-          },
-        ]}
-        isTyping={false}
-      />
-      <Message
-        avatar={"/andrey.jpg"}
-        text={null}
-        date={null}
-        isMe={true}
-        isRead={true}
-        attachments={[
-          {
-            filename: "image.jpg",
-            url: "/dima.jpg",
-          },
-          {
-            filename: "image.jpg",
-            url: "/dima.jpg",
-          },
-          {
-            filename: "image.jpg",
-            url: "/andrey.jpg",
-          },
-        ]}
-        isTyping={false}
-      />
-      <Message
-        avatar={"/dima.jpg"}
-        text={null}
-        date={null}
-        isMe={false}
-        isRead={false}
-        isTyping={true}
-      />
+      {isLoading ? (
+        <div
+          style={{
+            height: "80vh",
+            width: "100%",
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+          }}
+        >
+          <ThreeCircles
+            height="120"
+            width="120"
+            color="#9b9b9b"
+            visible={true}
+            ariaLabel="three-circles-rotating"
+          />
+        </div>
+      ) : items && !isLoading ? (
+        items.map((item: any) => <Message {...item} />)
+      ) : (
+        <S.NoMessages>
+          <Image src={"/nomessage.png"} alt={"nodata"} width={64} height={64} />
+          <span>Откройте диалог</span>
+        </S.NoMessages>
+      )}
     </S.Messages>
-  ) : (
-    <S.NoMessages>
-      <Image src={"/nomessage.png"} alt={"nodata"} width={64} height={64} />
-      <span>Откройте диалог</span>
-    </S.NoMessages>
   );
 };
 
