@@ -1,7 +1,7 @@
 import styled from "@emotion/styled";
 import { colors } from "../../styled";
 
-export const Dialog = styled.div<{ active?: boolean }>`
+export const Dialog = styled.div<{ active: boolean }>`
   display: flex;
   cursor: pointer;
   padding: 7px 20px;

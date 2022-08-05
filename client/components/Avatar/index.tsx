@@ -4,16 +4,17 @@ import generateAvatarFromHash from "../../utils/generateAvatarFromHash";
 
 type Props = {
   user: any;
+  isMessage?: boolean;
 };
 
-const Avatar: FC<Props> = ({ user }) => {
+const Avatar: FC<Props> = ({ user, isMessage }) => {
   if (user.avatar) {
     return (
       <Image
         src={user.avatar}
         alt={`Avatar ${user.fullName}`}
-        width={40}
-        height={40}
+        width={isMessage ? 33 : 40}
+        height={isMessage ? 33 : 40}
         style={{ borderRadius: "50%" }}
       />
     );
@@ -26,14 +27,14 @@ const Avatar: FC<Props> = ({ user }) => {
         style={{
           background: `linear-gradient(135deg, ${color} 0%, ${colorLighten} 96.52%)`,
           borderRadius: "50%",
-          width: "40px",
-          height: "40px",
+          width: isMessage ? "33px" : "40px",
+          height: isMessage ? "33px" : "40px",
           color: "#fff",
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
-          fontSize: 22,
-          fontWeight: 700,
+          fontSize: isMessage ? "20px" : "22px",
+          fontWeight: isMessage ? 500 : 700,
           lineHeight: "40px",
         }}
       >

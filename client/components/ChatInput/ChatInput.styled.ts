@@ -14,10 +14,9 @@ export const ChatInput = styled.div`
     }
   }
   input {
-    max-width: 910px;
     width: 100%;
     outline: none;
-    padding: 6px 11px 6px 40px;
+    padding: 6px 140px 6px 40px;
     height: 38px;
     border-radius: 6px;
     border: 0;
@@ -28,4 +27,13 @@ export const ChatInput = styled.div`
       font-size: 14px;
     }
   }
+`;
+export const Emoji = styled.div`
+  position: absolute;
+  top: -450px;
+  opacity: 1;
+  &:hover {
+    opacity: 1;
+  }
+  margin-bottom: 30px;
 `;
