@@ -1,5 +1,5 @@
 import express from "express";
-import { UserModel } from "../schemas";
+import { UserModel } from "../models";
 
 class UserController {
   show(req: express.Request, res: express.Response): void {
@@ -27,7 +27,7 @@ class UserController {
       });
   }
 
-  getMe() {
+  me() {
     //TODO: сделать метод возвращающий пользователю информацию о себе
   }
 
