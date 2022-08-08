@@ -13,7 +13,6 @@ const CurrentDialog = () => {
         <S.CurrentDialogUser>
           <b>Дима Матюшкин</b>
           <S.CurrentDialogStatus online={true}>
-            {/*потом по необходимости перенести в отдельный компонент https://www.youtube.com/watch?v=VLi5k9o8OGA&list=PL0FGkDGJQjJFDr8R3D6dFVa1nhce_2-ly&index=7 (1:08:52)*/}
             <div>онлайн</div>
           </S.CurrentDialogStatus>
         </S.CurrentDialogUser>

@@ -60,7 +60,6 @@ const Message: FC<Props> = ({
       <S.MessageContent isMe={isMe}>
         <div>
           {(audio || text || isTyping) && (
-            // https://www.youtube.com/watch?v=4lMbguyj5KQ&list=PL0FGkDGJQjJFDr8R3D6dFVa1nhce_2-ly&index=9&ab_channel=ArchakovBlog : 2 49 58
             <S.MessageBubble isMe={isMe} isAudio={!!audio}>
               {/*<S.MessageText isMe={isMe}>{text}</S.MessageText>*/}
               {text && (
