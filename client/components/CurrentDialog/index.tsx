@@ -1,8 +1,10 @@
 import * as S from "./CurrentDialog.styled";
 import Image from "next/image";
-import ChatInput from "../ChatInput";
 import MessagesContainer from "../../containers/MessagesContainer";
 import { useRef } from "react";
+import ChatInputContainer from "../../containers/ChatInputContainer";
+import Status from "../Status";
+import StatusContainer from "../../containers/StatusContainer";
 
 const CurrentDialog = () => {
   const messagesCurrentDialogRef = useRef(null);
@@ -11,10 +13,7 @@ const CurrentDialog = () => {
       <S.CurrentDialogHeader>
         <div />
         <S.CurrentDialogUser>
-          <b>Дима Матюшкин</b>
-          <S.CurrentDialogStatus online={true}>
-            <div>онлайн</div>
-          </S.CurrentDialogStatus>
+          <StatusContainer />
         </S.CurrentDialogUser>
         <div style={{ minWidth: "20px", cursor: "pointer" }}>
           <Image src={"/option.png"} width={20} height={20} />
@@ -23,7 +22,7 @@ const CurrentDialog = () => {
       <S.CurrentDialogChat ref={messagesCurrentDialogRef}>
         <MessagesContainer scroll={messagesCurrentDialogRef} />
       </S.CurrentDialogChat>
-      <ChatInput />
+      <ChatInputContainer />
     </S.CurrentDialog>
   );
 };

@@ -26,7 +26,7 @@ export const LoginTitle = styled.div`
 `;
 export const LoginForm = styled.form``;
 
-export const RegisterLink = styled.a`
+export const RegisterLink = styled.span`
   cursor: pointer;
   opacity: 0.5;
   text-align: center;

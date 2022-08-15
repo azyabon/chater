@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { FC, useState } from "react";
 import * as S from "./ChatInput.styled";
 import Image from "next/image";
 // @ts-ignore
@@ -7,9 +7,21 @@ import data from "@emoji-mart/data";
 // @ts-ignore
 import Picker from "@emoji-mart/react";
 
-const ChatInput = () => {
+type Props = {
+  onSendMessage: any;
+  currentDialogId: string | undefined;
+};
+
+const ChatInput: FC<Props> = ({ onSendMessage, currentDialogId }) => {
   const [value, setValue] = useState<string>("");
   const [emoji, setEmoji] = useState<boolean>(false);
+
+  const handleSendMessage = (keyCode: number) => {
+    if (keyCode === 13) {
+      onSendMessage(value, currentDialogId);
+      setValue("");
+    }
+  };
 
   return (
     <S.ChatInput>
@@ -77,6 +89,7 @@ const ChatInput = () => {
         onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
           setValue(e.target.value)
         }
+        onKeyUp={(e) => handleSendMessage(e.keyCode)}
         placeholder="Введите текст..."
       ></input>
     </S.ChatInput>

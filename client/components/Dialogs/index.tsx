@@ -43,15 +43,11 @@ const Dialogs: FC<Props> = ({
         orderBy(items, ["created_at"], ["desc"]).map((item) => {
           return (
             <Dialog
-              _id={item._id}
               onSelect={onSelectDialog}
-              key={item.user._id}
-              user={item.user}
-              message={item}
-              unRead={0}
-              isMe={item.user._id === userId}
-              isRead={item.isRead}
+              key={item.author._id}
+              isMe={item.author._id === userId}
               currentDialogId={currentDialogId}
+              {...item}
             />
           );
         })

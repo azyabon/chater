@@ -6,6 +6,14 @@ export default (
   res: express.Response,
   next: express.NextFunction
 ): void => {
+  if (
+    req.path === "/user/login" ||
+    req.path === "/user/registration" ||
+    req.path === "/user/verify"
+  ) {
+    return next();
+  }
+
   const token: any = req.headers.token;
 
   verifyJWTToken(token)

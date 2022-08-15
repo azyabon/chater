@@ -12,7 +12,6 @@ export default (state = initialState, { type, payload }: any) => {
         items: payload,
       };
     case "DIALOGS:SET_CURRENT_DIALOG_ID":
-      console.log(payload, 1);
       return {
         ...state,
         currentDialogId: payload,

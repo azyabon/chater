@@ -1,6 +1,6 @@
 import * as S from "./Sidebar.styled";
 import Image from "next/image";
-import DialogsFilter from "../../containers/DialogsFilter";
+import DialogsContainer from "../../containers/DialogsContainer";
 
 const Sidebar = () => {
   return (
@@ -17,7 +17,7 @@ const Sidebar = () => {
         </S.SidebarIconEdit>
       </S.SidebarHeader>
       <S.SidebarDialogs>
-        <DialogsFilter userId={0} items />
+        <DialogsContainer userId={0} />
       </S.SidebarDialogs>
     </S.Sidebar>
   );
