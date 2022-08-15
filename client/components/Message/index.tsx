@@ -20,18 +20,19 @@ type Props = {
   attachments?: Array<any>;
   isTyping: boolean;
   audio?: string;
+  dialog: any;
 };
 
 const Message: FC<Props> = ({
-  avatar,
   text,
   date,
   user,
-  isMe,
   isRead,
   audio,
   attachments,
   isTyping,
+  dialog,
+  isMe,
 }) => {
   const [isPlaying, setIsPlaying] = useState<boolean>(false);
   const [progress, setProgress] = useState<number>(0);

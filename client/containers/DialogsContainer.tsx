@@ -2,16 +2,17 @@ import React, { FC, useEffect, useState } from "react";
 import Dialogs from "../components/Dialogs";
 import { connect } from "react-redux";
 import { dialogsActions } from "../store/actions";
+import socket from "../core/socket";
 
 type Props = {
-  items: any;
+  items?: any;
   userId?: number;
   fetchDialogs?: any;
   setCurrentDialogId?: any;
-  currentDialogId: string | number;
+  currentDialogId?: any;
 };
 
-const DialogsFilter: FC<Props> = ({
+const DialogsContainer: FC<Props> = ({
   items,
   userId,
   fetchDialogs,
@@ -21,23 +22,32 @@ const DialogsFilter: FC<Props> = ({
   const [inputValue, setInputValue] = useState<string>("");
   const [filtered, setFiltered] = useState<any>(Array.from(items));
 
-  const onChangeInput = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const value = e.target.value;
+  const onChangeInput = (e: React.ChangeEvent<HTMLInputElement>): void => {
+    const value: string = e.target.value;
     setFiltered(
       items.filter(
         (dialog: any) =>
-          dialog.user.fullName.toLowerCase().indexOf(value.toLowerCase()) >= 0
+          dialog.author.fullName.toLowerCase().indexOf(value.toLowerCase()) >=
+            0 ||
+          dialog.partner.fullName.toLowerCase().indexOf(value.toLowerCase()) >=
+            0
       )
     );
-    setInputValue(e.target.value);
+    setInputValue(value);
   };
 
-  useEffect(() => {
+  const onNewDialog = (): void => {
+    fetchDialogs();
+  };
+
+  useEffect((): any => {
     if (!items.length) {
       fetchDialogs();
     } else {
       setFiltered(items);
     }
+    socket.on("SERVER:DIALOG_CREATED", onNewDialog);
+    return () => socket.removeListener("SERVER:DIALOG_CREATED", onNewDialog);
   }, [items]);
 
   return (
@@ -52,4 +62,7 @@ const DialogsFilter: FC<Props> = ({
   );
 };
 
-export default connect(({ dialogs }) => dialogs, dialogsActions)(DialogsFilter);
+export default connect(
+  ({ dialogs }) => dialogs,
+  dialogsActions
+)(DialogsContainer);

@@ -3,16 +3,22 @@ import Button from "../../components/Button";
 import ShadowBlock from "../../components/ShadowBlock";
 import Input from "../../components/Input";
 import Link from "next/link";
-import { useState } from "react";
+import { FC, useState } from "react";
 import Image from "next/image";
 import * as yup from "yup";
 import { Formik } from "formik";
+import { connect } from "react-redux";
+import { userAction } from "../../store/actions";
 
 const regPass = /(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])/g;
 const regEmail =
   /([A-zА-я])+([0-9\-_\+\.])*([A-zА-я0-9\-_\+\.])*@([A-zА-я])+([0-9\-_\+\.])*([A-zА-я0-9\-_\+\.])*[\.]([A-zА-я])+/g;
 
-const Registr = () => {
+type Props = {
+  fetchUserRegister?: any;
+};
+
+const Registr: FC<Props> = ({ fetchUserRegister }) => {
   const [success, setSuccess] = useState(false);
   const validationSchema = yup.object().shape({
     email: yup
@@ -50,7 +56,7 @@ const Registr = () => {
                 textDecoration: "underline",
               }}
             >
-              <Link href={"/"}>Go to chat!</Link>
+              <Link href={"/signin"}>Go to login!</Link>
             </S.LoginLink>
           </S.Confirm>
         ) : (
@@ -67,8 +73,19 @@ const Registr = () => {
                 confirmPassword: "",
               }}
               validateOnBlur
-              onSubmit={(values) => {
-                console.log(values);
+              onSubmit={({ email, password, username }) => {
+                const postData: any = {
+                  email,
+                  password,
+                  fullName: username,
+                };
+                fetchUserRegister(postData).then((res: any) => {
+                  if (!res.data.code) {
+                    setSuccess(true);
+                  } else {
+                    alert("Пользователь с таким email уже существует!");
+                  }
+                });
               }}
               validationSchema={validationSchema}
             >
@@ -122,7 +139,7 @@ const Registr = () => {
                   <Input
                     id={"confirmPassword"}
                     placeholder={"Confirm password"}
-                    type={"confirmPassword"}
+                    type={"password"}
                     name={"confirmPassword"}
                     onChange={handleChange}
                     onBlur={handleBlur}
@@ -143,7 +160,7 @@ const Registr = () => {
               )}
             </Formik>
             <S.LoginLink>
-              <Link href={"signin"}>Enter in your account</Link>
+              <Link href="signin">Enter in your account</Link>
             </S.LoginLink>
           </>
         )}
@@ -152,4 +169,4 @@ const Registr = () => {
   );
 };
 
-export default Registr;
+export default connect((state) => state, userAction)(Registr);

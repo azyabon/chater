@@ -1,5 +1,4 @@
 import styled from "@emotion/styled";
-import { colors } from "../../styled";
 
 export const CurrentDialog = styled.div`
   flex: 1;

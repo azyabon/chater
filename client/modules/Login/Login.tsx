@@ -6,15 +6,23 @@ import Link from "next/link";
 import { FC } from "react";
 import { Formik } from "formik";
 import * as yup from "yup";
+import { connect } from "react-redux";
+import { userAction } from "../../store/actions";
+import Router from "next/router";
 
-const regPass = /(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])/g;
+type Props = {
+  fetchUserLogin?: any;
+};
 
-const Login: FC = () => {
+const Login: FC<Props> = ({ fetchUserLogin }) => {
+  const regPass = /(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])/g;
+  const regEmail =
+    /([A-zА-я])+([0-9\-_\+\.])*([A-zА-я0-9\-_\+\.])*@([A-zА-я])+([0-9\-_\+\.])*([A-zА-я0-9\-_\+\.])*[\.]([A-zА-я])+/g;
   const validationSchema = yup.object().shape({
-    username: yup
+    email: yup
       .string()
       .required("This field is required")
-      .min(4, "Minimum 4 characters"),
+      .matches(regEmail, "Неправильный email"),
     password: yup
       .string()
       .required("This field is required")
@@ -31,14 +39,20 @@ const Login: FC = () => {
         </S.LoginTitle>
         <Formik
           initialValues={{
-            username: "",
+            email: "",
             password: "",
           }}
           validateOnBlur
-          onSubmit={(values) => {
-            console.log(values);
+          onSubmit={({ email, password }) => {
+            const postData: any = {
+              email,
+              password,
+            };
+            fetchUserLogin(postData).then(() => {
+              Router.push("/");
+            });
           }}
-          validationSchema={validationSchema}
+          // validationSchema={validationSchema}
         >
           {({
             values,
@@ -52,16 +66,16 @@ const Login: FC = () => {
           }) => (
             <S.LoginForm>
               <Input
-                id={"username"}
-                placeholder={"Username"}
+                id={"email"}
+                placeholder={"Email"}
                 type={"text"}
-                name={"username"}
+                name={"email"}
                 onChange={handleChange}
                 onBlur={handleBlur}
-                value={values.username}
+                value={values.email}
               />
-              {touched.username && errors.username && (
-                <S.Error>{errors.username}</S.Error>
+              {touched.email && errors.email && (
+                <S.Error>{errors.email}</S.Error>
               )}
               <Input
                 id={"password"}
@@ -87,11 +101,11 @@ const Login: FC = () => {
           )}
         </Formik>
         <S.RegisterLink>
-          <Link href={"signup"}>Don't have an account? Register!</Link>
+          <Link href="signup">Don't have an account? Register!</Link>
         </S.RegisterLink>
       </ShadowBlock>
     </S.Login>
   );
 };
 
-export default Login;
+export default connect((state) => state, userAction)(Login);
