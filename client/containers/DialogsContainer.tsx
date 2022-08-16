@@ -6,7 +6,7 @@ import socket from "../core/socket";
 
 type Props = {
   items?: any;
-  userId?: number;
+  userId?: string;
   fetchDialogs?: any;
   setCurrentDialogId?: any;
   currentDialogId?: any;

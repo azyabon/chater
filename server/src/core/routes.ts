@@ -20,6 +20,7 @@ export default (app: express.Express, io: socket.Server) => {
   app.use(checkAuth);
   app.use(updateLastSeen);
 
+  app.get("/user/find", User.findUsers);
   app.get("/user/verify", User.verify);
   app.get("/user/me", User.me);
   app.get("/user/:id", User.show);

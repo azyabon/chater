@@ -3,7 +3,6 @@ import Image from "next/image";
 import MessagesContainer from "../../containers/MessagesContainer";
 import { useRef } from "react";
 import ChatInputContainer from "../../containers/ChatInputContainer";
-import Status from "../Status";
 import StatusContainer from "../../containers/StatusContainer";
 
 const CurrentDialog = () => {
@@ -11,7 +10,9 @@ const CurrentDialog = () => {
   return (
     <S.CurrentDialog>
       <S.CurrentDialogHeader>
-        <div />
+        <div style={{ cursor: "pointer" }}>
+          <Image src={"/close.png"} width={10} height={10} />
+        </div>
         <S.CurrentDialogUser>
           <StatusContainer />
         </S.CurrentDialogUser>

@@ -30,7 +30,7 @@ export const ChatInput = styled.div`
 `;
 export const Emoji = styled.div`
   position: absolute;
-  top: -450px;
+  top: -435px;
   opacity: 1;
   &:hover {
     opacity: 1;

@@ -8,4 +8,5 @@ export default {
       text,
       dialogId,
     }),
+  removeById: (id: string) => axios.delete("/messages?id=" + id),
 };

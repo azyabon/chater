@@ -5,4 +5,5 @@ export default {
   registr: (postData: any) => axios.post("/user/registration", postData),
   verifyHash: (hash: string) => axios.get(`/user/verify?hash=${hash}`),
   getMe: () => axios.get("/user/me"),
+  findUsers: (query: string) => axios.get(`/user/find?query=${query}`),
 };

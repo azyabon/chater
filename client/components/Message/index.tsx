@@ -21,6 +21,7 @@ type Props = {
   isTyping: boolean;
   audio?: string;
   dialog: any;
+  removeMessage: any;
 };
 
 const Message: FC<Props> = ({
@@ -33,11 +34,14 @@ const Message: FC<Props> = ({
   isTyping,
   dialog,
   isMe,
+  removeMessage,
 }) => {
   const [isPlaying, setIsPlaying] = useState<boolean>(false);
   const [progress, setProgress] = useState<number>(0);
   const [currentTime, setCurrentTime] = useState<number>(0);
   const audioRef: any = useRef(null);
+  const [option, setOption] = useState(false);
+  const [menu, setMenu] = useState(false);
 
   const togglePlay = () => {
     if (audioRef.current) {
@@ -51,7 +55,14 @@ const Message: FC<Props> = ({
   };
 
   return (
-    <S.Message isMe={isMe}>
+    <S.Message
+      isMe={isMe}
+      onMouseEnter={() => setOption(true)}
+      onMouseLeave={() => {
+        setMenu(false);
+        setOption(false);
+      }}
+    >
       <S.MessageAvatar
         isMe={isMe}
         image={attachments?.length === 1 && text === null}
@@ -62,7 +73,26 @@ const Message: FC<Props> = ({
         <div>
           {(audio || text || isTyping) && (
             <S.MessageBubble isMe={isMe} isAudio={!!audio}>
-              {/*<S.MessageText isMe={isMe}>{text}</S.MessageText>*/}
+              <S.MessageMenu show={menu}>
+                <span onClick={removeMessage}>Remove</span>
+                <span>Edit</span>
+                <span>Reply</span>
+                <span>Forward</span>
+              </S.MessageMenu>
+              {isMe && option && (
+                <div
+                  onMouseEnter={() => setMenu(true)}
+                  style={{
+                    position: "absolute",
+                    top: 3,
+                    left: -15,
+                    cursor: "pointer",
+                    transform: "rotate(90deg)",
+                  }}
+                >
+                  <Image src={"/option.png"} width={15} height={15} />
+                </div>
+              )}
               {text && (
                 <S.MessageText isMe={isMe}>
                   {reactStringReplace(text, /:(.+?):/g, (match, i) => (

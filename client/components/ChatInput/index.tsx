@@ -32,6 +32,8 @@ const ChatInput: FC<Props> = ({ onSendMessage, currentDialogId }) => {
           left: 30,
           cursor: "pointer",
         }}
+        onMouseEnter={() => setEmoji(true)}
+        onMouseLeave={() => setEmoji(false)}
       >
         {emoji ? (
           <S.Emoji>
@@ -42,13 +44,7 @@ const ChatInput: FC<Props> = ({ onSendMessage, currentDialogId }) => {
             />
           </S.Emoji>
         ) : null}
-        <Image
-          src={"/smile.png"}
-          width={20}
-          height={20}
-          alt={"smile"}
-          onClick={() => setEmoji(!emoji)}
-        />
+        <Image src={"/smile.png"} width={20} height={20} alt={"smile"} />
       </div>
       <div
         style={{
