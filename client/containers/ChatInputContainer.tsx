@@ -12,7 +12,6 @@ const ChatInputContainer: FC<Props> = ({
   fetchSendMessage,
   currentDialogId,
 }) => {
-  console.log(fetchSendMessage);
   return (
     <ChatInput
       onSendMessage={fetchSendMessage}

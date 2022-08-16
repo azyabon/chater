@@ -11,6 +11,7 @@ export const CurrentDialogHeader = styled.header`
   align-items: center;
   padding: 15px;
   border-bottom: 1px solid #f7f7f7;
+  min-height: 68px;
 `;
 export const CurrentDialogUser = styled.div`
   text-align: center;

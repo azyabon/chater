@@ -163,3 +163,30 @@ export const MessageAudioContentDuration = styled.span`
   font-size: 14px;
   opacity: 0.7;
 `;
+export const MessageMenu = styled.div<{ show: boolean }>`
+  display: ${({ show }) => (show ? "flex" : "none")};
+  flex-direction: column;
+  position: absolute;
+  left: -72px;
+  top: 0;
+  background-color: #fff;
+  box-shadow: 0 0 4px black;
+  border-radius: 4px;
+  span {
+    display: inline-block;
+    padding: 3px 4px;
+    text-align: center;
+    width: 100%;
+    font-size: 13px;
+    border-bottom: 1px solid black;
+    :last-of-type {
+      border-bottom: 0;
+    }
+
+    &:hover {
+      background-color: #87adff;
+      cursor: pointer;
+      color: #fff;
+    }
+  }
+`;

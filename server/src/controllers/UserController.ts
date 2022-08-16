@@ -5,7 +5,6 @@ import { createJWTToken } from "../utils";
 import { IUser } from "../models/User";
 import { validationResult, Result, ValidationError } from "express-validator";
 import bcrypt from "bcrypt";
-import message from "../models/Message";
 
 class UserController {
   io: socket.Server;
@@ -50,6 +49,22 @@ class UserController {
         res.json(user);
       }
     });
+  };
+
+  findUsers = (req: express.Request, res: express.Response) => {
+    const query: any = req.query.query;
+    UserModel.find()
+      .or([
+        { fullName: new RegExp(query, "i") },
+        { email: new RegExp(query, "i") },
+      ])
+      .then((users: IUser[]) => res.json(users))
+      .catch((err: any) => {
+        return res.status(404).json({
+          status: "error",
+          message: err,
+        });
+      });
   };
 
   create = (req: express.Request, res: express.Response): void => {

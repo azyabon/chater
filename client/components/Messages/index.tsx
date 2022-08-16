@@ -8,10 +8,10 @@ type Props = {
   items?: any;
   isLoading: boolean;
   user: any;
+  removeMessage: any;
 };
 
-const Messages: FC<Props> = ({ items, isLoading, user }) => {
-  console.log(user);
+const Messages: FC<Props> = ({ items, isLoading, user, removeMessage }) => {
   return (
     <S.Messages>
       {isLoading ? (
@@ -34,7 +34,12 @@ const Messages: FC<Props> = ({ items, isLoading, user }) => {
         </div>
       ) : items && !isLoading ? (
         items.map((item: any) => (
-          <Message {...item} isMe={user._id === item.user._id} />
+          <Message
+            key={item._id}
+            {...item}
+            isMe={user._id === item.user._id}
+            removeMessage={removeMessage.bind(this, item._id)}
+          />
         ))
       ) : (
         <S.NoMessages>

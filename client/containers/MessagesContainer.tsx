@@ -13,6 +13,7 @@ type Props = {
   isLoading: boolean;
   scroll: any;
   user: any;
+  removeMessageById: any;
 };
 
 const MessagesContainer: FC<Props> = ({
@@ -23,6 +24,7 @@ const MessagesContainer: FC<Props> = ({
   scroll,
   addMessage,
   user,
+  removeMessageById,
 }) => {
   const onNewMessage = (data: any) => {
     addMessage(data);
@@ -42,7 +44,14 @@ const MessagesContainer: FC<Props> = ({
     }
   }, [items]);
 
-  return <Messages user={user} items={items} isLoading={isLoading} />;
+  return (
+    <Messages
+      user={user}
+      items={items}
+      isLoading={isLoading}
+      removeMessage={removeMessageById}
+    />
+  );
 };
 
 export default connect(

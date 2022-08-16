@@ -6,7 +6,7 @@ import Image from "next/image";
 
 type Props = {
   items: any;
-  userId?: number;
+  userId?: string;
   onSearch: any;
   inputValue: string;
   onSelectDialog: any;
@@ -45,7 +45,7 @@ const Dialogs: FC<Props> = ({
             <Dialog
               onSelect={onSelectDialog}
               key={item.author._id}
-              isMe={item.author._id === userId}
+              isMe={item.lastMessage.user._id === userId}
               currentDialogId={currentDialogId}
               {...item}
             />
