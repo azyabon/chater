@@ -35,5 +35,5 @@ export default (app: express.Express, io: socket.Server) => {
 
   app.get("/messages", Message.index);
   app.post("/messages", Message.create);
-  app.delete("/messages/:id", Message.delete);
+  app.delete("/messages", Message.delete);
 };

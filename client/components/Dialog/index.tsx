@@ -4,18 +4,19 @@ import MessageStatus from "../MessageStatus";
 import { format, isToday, isYesterday } from "date-fns";
 import Avatar from "../Avatar";
 import Link from "next/link";
+import { IMessage, IUser } from "../../types/types";
 
 type Props = {
-  user: any;
-  lastMessage: any;
+  user: IUser;
+  lastMessage: IMessage;
   unRead: number;
   isMe: boolean;
   isRead: boolean;
-  onSelect: any;
-  _id: string | number;
-  currentDialogId: number | string;
-  partner: any;
-  author: any;
+  onSelect: (id: string) => void;
+  _id: string;
+  currentDialogId: string | undefined;
+  partner: IUser;
+  author: IUser;
 };
 
 const getMessageTime = (created_at: any) => {
@@ -26,7 +27,6 @@ const getMessageTime = (created_at: any) => {
   }
   return format(created_at, "dd/MM/yyyy");
 };
-
 const Dialog: FC<Props> = ({
   lastMessage,
   unRead,
@@ -48,13 +48,16 @@ const Dialog: FC<Props> = ({
           }, 0);
         }}
       >
-        <S.DialogAvatar online={partner.isOnline}>
+        {/*<S.DialogAvatar online={partner.isOnline}>*/}
+        <S.DialogAvatar online={true}>
           <Avatar user={partner} />
         </S.DialogAvatar>
         <S.DialogInfo>
           <S.DialogInfoTop>
             <b>{partner.fullName}</b>
-            <span>{getMessageTime(Date.parse(lastMessage.createdAt))}</span>
+            <span>
+              {getMessageTime(Date.parse(lastMessage.createdAt.toString()))}
+            </span>
           </S.DialogInfoTop>
           <S.DialogInfoBottom>
             <p style={{ flex: 1 }}>{lastMessage.text}</p>

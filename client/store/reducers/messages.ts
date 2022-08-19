@@ -1,3 +1,5 @@
+import { Message } from "../../types/types";
+
 const initialState = {
   items: [],
   isLoading: false,
@@ -14,7 +16,9 @@ export default (state = initialState, { type, payload }: any) => {
     case "MESSAGES:REMOVE_MESSAGE":
       return {
         ...state,
-        items: state.items.filter((message: any) => message._id !== payload),
+        items: state.items.filter(
+          (message: Message) => message._id !== payload
+        ),
       };
     case "MESSAGES:ADD_MESSAGE":
       return {

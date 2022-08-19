@@ -7,8 +7,6 @@ import Wave from "../../assets/svg/Wave/Wave";
 import convertAudioTime from "../../utils/convert-audio-time";
 import Avatar from "../Avatar";
 // @ts-ignore
-import { Emoji } from "emoji-mart";
-import reactStringReplace from "react-string-replace";
 
 type Props = {
   avatar: string;
@@ -93,13 +91,7 @@ const Message: FC<Props> = ({
                   <Image src={"/option.png"} width={15} height={15} />
                 </div>
               )}
-              {text && (
-                <S.MessageText isMe={isMe}>
-                  {reactStringReplace(text, /:(.+?):/g, (match, i) => (
-                    <Emoji key={i} emoji={match} size={16} />
-                  ))}
-                </S.MessageText>
-              )}
+              {text && <S.MessageText isMe={isMe}>{text}</S.MessageText>}
               {isTyping ? (
                 <S.MessageTyping>
                   <S.MessageDot />

@@ -2,9 +2,10 @@ import { FC, useState } from "react";
 import { connect } from "react-redux";
 import Sidebar from "../components/Sidebar";
 import { dialogsApi, userApi } from "../utils/api";
+import { IUser } from "../types/types";
 
 type Props = {
-  user?: any;
+  user?: IUser;
 };
 
 const SidebarContainer: FC<Props> = ({ user }) => {

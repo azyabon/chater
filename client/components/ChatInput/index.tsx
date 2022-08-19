@@ -40,7 +40,7 @@ const ChatInput: FC<Props> = ({ onSendMessage, currentDialogId }) => {
             <Picker
               size={16}
               data={data}
-              onEmojiSelect={(emoji: any) => setValue(value + emoji.unified)}
+              onEmojiSelect={(emoji: any) => setValue(value + emoji.native)}
             />
           </S.Emoji>
         ) : null}
@@ -87,7 +87,7 @@ const ChatInput: FC<Props> = ({ onSendMessage, currentDialogId }) => {
         }
         onKeyUp={(e) => handleSendMessage(e.keyCode)}
         placeholder="Введите текст..."
-      ></input>
+      />
     </S.ChatInput>
   );
 };

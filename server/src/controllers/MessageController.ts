@@ -1,6 +1,7 @@
 import express from "express";
 import { DialogModel, MessageModel } from "../models";
 import socket from "socket.io";
+import { IMessage } from "../models/Message";
 
 class MessageController {
   io: socket.Server;
@@ -67,24 +68,65 @@ class MessageController {
   };
 
   delete = (req: express.Request, res: express.Response): void => {
-    const id: string = req.params.id;
-    MessageModel.findOneAndRemove({ _id: id })
-      .then((message: any) => {
-        if (message) {
-          res.json({
-            message: `Message deleted`,
-          });
-        } else {
-          res.status(404).json({
-            status: "error",
-          });
-        }
-      })
-      .catch((err: any) => {
-        res.status(404).json({
-          message: err,
+    const id: any = req.query.id;
+    const userId: string = req.user._id;
+
+    MessageModel.findById(id, (err: any, message: any) => {
+      if (err || !message) {
+        return res.status(404).json({
+          status: "error",
+          message: "Message not found",
         });
-      });
+      }
+
+      if (message.user.toString() === userId) {
+        const dialogId = message.dialog;
+        message.remove();
+
+        MessageModel.findOne(
+          { dialog: dialogId },
+          {},
+          { sort: { created_at: -1 } },
+          (err, lastMessage) => {
+            if (err) {
+              res.status(500).json({
+                status: "error",
+                message: err,
+              });
+            }
+
+            DialogModel.findById(dialogId, (err: any, dialog: any) => {
+              if (err) {
+                res.status(500).json({
+                  status: "error",
+                  message: err,
+                });
+              }
+
+              if (!dialog) {
+                return res.status(404).json({
+                  status: "not found",
+                  message: err,
+                });
+              }
+
+              dialog.lastMessage = lastMessage;
+              dialog.save();
+            });
+          }
+        );
+
+        return res.json({
+          status: "success",
+          message: "Message deleted",
+        });
+      } else {
+        return res.status(403).json({
+          status: "error",
+          message: "Not have permission",
+        });
+      }
+    });
   };
 }
 

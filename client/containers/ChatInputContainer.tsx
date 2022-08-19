@@ -4,7 +4,7 @@ import { connect } from "react-redux";
 import { messagesAction } from "../store/actions";
 
 type Props = {
-  fetchSendMessage?: any;
+  fetchSendMessage?: (text: string, id: string) => void;
   currentDialogId?: string;
 };
 

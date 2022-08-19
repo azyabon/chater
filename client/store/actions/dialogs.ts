@@ -1,11 +1,12 @@
 import { dialogsApi } from "../../utils/api";
+import { Dialog } from "../../types/types";
 
 const actions = {
-  setDialogs: (items: any) => ({
+  setDialogs: (items: Dialog[]) => ({
     type: "DIALOGS:SET_ITEMS",
     payload: items,
   }),
-  setCurrentDialogId: (id: string | number) => ({
+  setCurrentDialogId: (id: string) => ({
     type: "DIALOGS:SET_CURRENT_DIALOG_ID",
     payload: id,
   }),

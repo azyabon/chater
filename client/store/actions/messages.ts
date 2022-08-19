@@ -1,11 +1,12 @@
 import { messagesApi } from "../../utils/api";
+import { IMessage } from "../../types/types";
 
 const actions = {
-  setMessages: (items: any) => ({
+  setMessages: (items: IMessage[]) => ({
     type: "MESSAGES:SET_ITEMS",
     payload: items,
   }),
-  addMessage: (message: any) => (dispatch: any, getState: any) => {
+  addMessage: (message: IMessage) => (dispatch: any, getState: any) => {
     const { dialogs } = getState();
     const { currentDialogId } = dialogs;
 
@@ -24,14 +25,16 @@ const actions = {
     payload: bool,
   }),
   removeMessageById: (id: string) => (dispatch: any) => {
-    messagesApi.removeById(id).then(() => {
-      dispatch({
-        type: "MESSAGES:REMOVE_MESSAGE",
-        payload: id,
+    if (window.confirm("Вы действительно хотите удалить сообщение?")) {
+      messagesApi.removeById(id).then(() => {
+        dispatch({
+          type: "MESSAGES:REMOVE_MESSAGE",
+          payload: id,
+        });
       });
-    });
+    }
   },
-  fetchMessages: (dialogId: string | number) => (dispatch: any) => {
+  fetchMessages: (dialogId: string) => (dispatch: any) => {
     dispatch(actions.setIsLoading(true));
     messagesApi
       .getAllByDialogId(dialogId)
