@@ -1,16 +1,17 @@
 import * as S from "./Dialogs.styled";
 import Dialog from "../Dialog";
-import { FC } from "react";
+import { ChangeEventHandler, FC } from "react";
 import { orderBy } from "lodash";
 import Image from "next/image";
+import { IDialog } from "../../types/types";
 
 type Props = {
-  items: any;
+  items: IDialog[];
   userId?: string;
-  onSearch: any;
+  onSearch: (event: ChangeEventHandler<HTMLInputElement>, id: string) => void;
   inputValue: string;
-  onSelectDialog: any;
-  currentDialogId: string | number;
+  onSelectDialog: (id: string) => void;
+  currentDialogId: string | undefined;
 };
 
 const Dialogs: FC<Props> = ({
@@ -34,7 +35,7 @@ const Dialogs: FC<Props> = ({
           <Image src={"/search.png"} alt={"search"} width={20} height={20} />
         </div>
         <S.DialogsInput
-          onChange={onSearch}
+          onChange={() => onSearch}
           value={inputValue}
           placeholder="Поиск среди контактов"
         ></S.DialogsInput>
@@ -43,6 +44,9 @@ const Dialogs: FC<Props> = ({
         orderBy(items, ["created_at"], ["desc"]).map((item) => {
           return (
             <Dialog
+              user={undefined}
+              unRead={0}
+              isRead={false}
               onSelect={onSelectDialog}
               key={item.author._id}
               isMe={item.lastMessage.user._id === userId}
