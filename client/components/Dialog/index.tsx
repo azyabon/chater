@@ -7,14 +7,14 @@ import Link from "next/link";
 import { IMessage, IUser } from "../../types/types";
 
 type Props = {
-  user: IUser;
+  user: IUser | undefined;
   lastMessage: IMessage;
   unRead: number;
   isMe: boolean;
   isRead: boolean;
   onSelect: (id: string) => void;
   _id: string;
-  currentDialogId: string | undefined;
+  currentDialogId: any;
   partner: IUser;
   author: IUser;
 };
@@ -35,6 +35,7 @@ const Dialog: FC<Props> = ({
   currentDialogId,
   partner,
   onSelect,
+  isRead,
   author,
 }) => {
   return (
@@ -48,20 +49,19 @@ const Dialog: FC<Props> = ({
           }, 0);
         }}
       >
-        {/*<S.DialogAvatar online={partner.isOnline}>*/}
-        <S.DialogAvatar online={true}>
+        <S.DialogAvatar online={partner.isOnline}>
           <Avatar user={partner} />
         </S.DialogAvatar>
         <S.DialogInfo>
           <S.DialogInfoTop>
             <b>{partner.fullName}</b>
             <span>
-              {getMessageTime(Date.parse(lastMessage.createdAt.toString()))}
+              {getMessageTime(Date.parse(lastMessage?.createdAt.toString()))}
             </span>
           </S.DialogInfoTop>
           <S.DialogInfoBottom>
             <p style={{ flex: 1 }}>{lastMessage.text}</p>
-            {isMe && <MessageStatus isMe={true} isRead={lastMessage.unread} />}
+            {isMe && <MessageStatus isMe={true} isRead={isRead} />}
             {unRead > 0 && (
               <S.MessageCounter>
                 {unRead > 999 ? "+999" : unRead}

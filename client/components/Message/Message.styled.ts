@@ -12,7 +12,7 @@ const typingAnimation = keyframes`
 `;
 
 export const Message = styled.div<{ isMe: boolean }>`
-  padding: 15px;
+  margin: 5px 15px 5px 15px;
   ${({ isMe }) =>
     isMe
       ? `

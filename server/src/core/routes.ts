@@ -9,11 +9,14 @@ import { loginValidation, registerValidation } from "../utils/validations";
 import bodyParser from "body-parser";
 import express from "express";
 import cors from "cors";
+import FileController from "../controllers/FileController";
+import multer from "./multer";
 
 export default (app: express.Express, io: socket.Server) => {
   const User = new UserController(io);
   const Dialog = new DialogController(io);
   const Message = new MessageController(io);
+  const File = new FileController();
 
   app.use(bodyParser.json());
   app.use(cors());
@@ -36,4 +39,7 @@ export default (app: express.Express, io: socket.Server) => {
   app.get("/messages", Message.index);
   app.post("/messages", Message.create);
   app.delete("/messages", Message.delete);
+
+  app.post("/file", multer.single("file"), File.create);
+  app.delete("/file", File.delete);
 };

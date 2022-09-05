@@ -1,7 +1,6 @@
 import express from "express";
 import { DialogModel, MessageModel } from "../models";
 import socket from "socket.io";
-import { IMessage } from "../models/Message";
 
 class MessageController {
   io: socket.Server;
@@ -12,9 +11,27 @@ class MessageController {
 
   index = (req: express.Request, res: express.Response): void => {
     const dialogId = req.query.dialog;
+    const userId = req.user._id;
+
+    MessageModel.updateMany(
+      {
+        dialog: dialogId,
+        user: { $ne: userId },
+      },
+      { isRead: true },
+      null,
+      (err: any) => {
+        if (err) {
+          return res.status(500).json({
+            status: "error",
+            message: err,
+          });
+        }
+      }
+    );
 
     MessageModel.find({ dialog: dialogId })
-      .populate(["dialog", "user"])
+      .populate(["dialog", "user", "attachments"])
       .exec(function (err, messages) {
         if (err) {
           return res.status(404).json({
@@ -32,35 +49,39 @@ class MessageController {
       text: req.body.text,
       user: userId,
       dialog: req.body.dialogId,
+      attachments: req.body.attachments,
     };
     const message = new MessageModel(postData);
     message
       .save()
       .then((obj: any): any => {
-        obj.populate(["dialog", "user"], (err: any, message: any) => {
-          if (err) {
-            return res.status(500).json({
-              message: err,
-            });
-          }
-
-          DialogModel.findOneAndUpdate(
-            { _id: postData.dialog },
-            { lastMessage: message._id },
-            { upsert: true },
-            function (err: any) {
-              if (err) {
-                return res.status(500).json({
-                  status: "error",
-                  message: err,
-                });
-              }
+        obj.populate(
+          ["dialog", "user", "attachments"],
+          (err: any, message: any) => {
+            if (err) {
+              return res.status(500).json({
+                message: err,
+              });
             }
-          );
 
-          res.json(message);
-          this.io.emit("SERVER:MESSAGE_CREATED", message);
-        });
+            DialogModel.findOneAndUpdate(
+              { _id: postData.dialog },
+              { lastMessage: message._id },
+              { upsert: true },
+              function (err: any) {
+                if (err) {
+                  return res.status(500).json({
+                    status: "error",
+                    message: err,
+                  });
+                }
+              }
+            );
+
+            res.json(message);
+            this.io.emit("SERVER:MESSAGE_CREATED", message);
+          }
+        );
       })
       .catch((reason) => {
         res.json(reason);
@@ -86,7 +107,7 @@ class MessageController {
         MessageModel.findOne(
           { dialog: dialogId },
           {},
-          { sort: { created_at: -1 } },
+          { sort: { createdAt: -1 } },
           (err, lastMessage) => {
             if (err) {
               res.status(500).json({

@@ -9,7 +9,7 @@ type Props = {
   items?: IDialog[];
   userId?: string;
   fetchDialogs?: () => void;
-  setCurrentDialogId?: (id: string) => void;
+  setCurrentDialogId?: any;
   currentDialogId?: string;
 };
 
@@ -20,11 +20,11 @@ const DialogsContainer: FC<Props> = ({
   setCurrentDialogId,
   currentDialogId,
 }) => {
-  const [inputValue, setInputValue] = useState<string>("");
+  const [inputValue, setInputValue] = useState("");
   const [filtered, setFiltered] = useState(Array.from(items || []));
 
-  const onChangeInput = (e: React.ChangeEvent<HTMLInputElement>): void => {
-    const value: string = e.target.value;
+  const onChangeInput = (e?: React.ChangeEvent<HTMLInputElement>): void => {
+    const value: string = e?.target.value || "";
     if (items) {
       setFiltered(
         items.filter(
@@ -40,35 +40,32 @@ const DialogsContainer: FC<Props> = ({
     setInputValue(value);
   };
 
-  const onNewDialog = (): void => {
+  useEffect(() => {
+    if (items?.length) {
+      onChangeInput();
+    }
+  }, [items]);
+
+  useEffect(() => {
     if (fetchDialogs) {
       fetchDialogs();
-    }
-  };
 
-  useEffect((): any => {
-    if (items && !items.length) {
-      if (fetchDialogs) {
-        fetchDialogs();
-      }
-    } else if (items) {
-      setFiltered(items);
+      socket.on("SERVER:DIALOG_CREATED", fetchDialogs);
+      socket.on("SERVER:MESSAGE_CREATED", fetchDialogs);
     }
-    socket.on("SERVER:DIALOG_CREATED", onNewDialog);
-    socket.on("SERVER:MESSAGE_CREATED", onNewDialog);
     return () => {
-      socket.removeListener("SERVER:DIALOG_CREATED", onNewDialog);
-      socket.removeListener("SERVER:MESSAGE_CREATED", onNewDialog);
+      socket.removeListener("SERVER:DIALOG_CREATED", fetchDialogs);
+      socket.removeListener("SERVER:MESSAGE_CREATED", fetchDialogs);
     };
-  }, [items]);
+  }, []);
 
   return (
     <Dialogs
       userId={userId}
       items={filtered}
-      onSearch={() => onChangeInput}
+      onSearch={onChangeInput}
       inputValue={inputValue}
-      onSelectDialog={() => setCurrentDialogId}
+      onSelectDialog={setCurrentDialogId}
       currentDialogId={currentDialogId}
     />
   );

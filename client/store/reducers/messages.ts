@@ -1,4 +1,4 @@
-import { Message } from "../../types/types";
+import { IMessage } from "../../types/types";
 
 const initialState = {
   items: [],
@@ -17,7 +17,7 @@ export default (state = initialState, { type, payload }: any) => {
       return {
         ...state,
         items: state.items.filter(
-          (message: Message) => message._id !== payload
+          (message: IMessage) => message._id !== payload
         ),
       };
     case "MESSAGES:ADD_MESSAGE":

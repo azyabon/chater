@@ -6,19 +6,18 @@ import MessageStatus from "../MessageStatus";
 import Wave from "../../assets/svg/Wave/Wave";
 import convertAudioTime from "../../utils/convert-audio-time";
 import Avatar from "../Avatar";
-// @ts-ignore
+import { IDialog, IUser } from "../../types/types";
 
 type Props = {
-  avatar: string;
   text: string | null;
-  date: number | null;
-  user?: any;
+  date: Date;
+  user: IUser;
   isMe: boolean;
   isRead: boolean;
   attachments?: Array<any>;
   isTyping: boolean;
   audio?: string;
-  dialog: any;
+  dialog: IDialog;
   removeMessage: any;
 };
 
@@ -155,7 +154,7 @@ const Message: FC<Props> = ({
             </S.MessageBubble>
           )}
           {date ? (
-            <Time date={date} isMe={isMe} />
+            <Time date={Date.parse(date.toString())} isMe={isMe} />
           ) : (
             <p style={{ height: 12 }}></p>
           )}

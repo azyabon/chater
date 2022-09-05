@@ -6,6 +6,7 @@ import { UploadField } from "@navjobs/upload";
 import data from "@emoji-mart/data";
 // @ts-ignore
 import Picker from "@emoji-mart/react";
+import UploadFiles from "../UploadFiles";
 
 type Props = {
   onSendMessage: any;

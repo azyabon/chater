@@ -8,7 +8,7 @@ import { IMessage, IUser } from "../types/types";
 
 type Props = {
   items?: IMessage[];
-  currentDialogId: string;
+  currentDialogId: any;
   fetchMessages: (id: string) => void;
   addMessage: (message: IMessage) => void;
   isLoading: boolean;
@@ -33,7 +33,7 @@ const MessagesContainer: FC<Props> = ({
 
   useEffect((): any => {
     if (currentDialogId) {
-      fetchMessages(currentDialogId);
+      fetchMessages(currentDialogId._id);
     }
     socket.on("SERVER:MESSAGE_CREATED", onNewMessage);
     return () => socket.removeListener("SERVER:MESSAGE_CREATED", onNewMessage);
