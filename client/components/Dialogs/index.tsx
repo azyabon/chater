@@ -8,7 +8,7 @@ import { IDialog } from "../../types/types";
 type Props = {
   items: IDialog[];
   userId?: string;
-  onSearch: (event: ChangeEventHandler<HTMLInputElement>, id: string) => void;
+  onSearch: any;
   inputValue: string;
   onSelectDialog: (id: string) => void;
   currentDialogId: string | undefined;
@@ -35,7 +35,7 @@ const Dialogs: FC<Props> = ({
           <Image src={"/search.png"} alt={"search"} width={20} height={20} />
         </div>
         <S.DialogsInput
-          onChange={() => onSearch}
+          onChange={onSearch}
           value={inputValue}
           placeholder="Поиск среди контактов"
         ></S.DialogsInput>
@@ -46,10 +46,10 @@ const Dialogs: FC<Props> = ({
             <Dialog
               user={undefined}
               unRead={0}
-              isRead={false}
+              isRead={item.lastMessage.isRead}
               onSelect={onSelectDialog}
               key={item.author._id}
-              isMe={item.lastMessage.user._id === userId}
+              isMe={item.lastMessage?.user._id === userId}
               currentDialogId={currentDialogId}
               {...item}
             />

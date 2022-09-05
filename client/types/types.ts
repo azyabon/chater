@@ -2,7 +2,7 @@ export interface IMessage {
   _id: string;
   text: string;
   dialog: IDialog;
-  unread: boolean;
+  isRead: boolean;
   user: IUser;
   createdAt: Date;
   updatedAt: Date;
@@ -22,6 +22,7 @@ export interface IUser {
   password: string;
   confirmed?: boolean;
   avatar?: string;
+  isOnline: boolean;
   confirm_hash?: string;
   last_seen?: Date;
   createdAt: Date;

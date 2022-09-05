@@ -16,6 +16,7 @@
     "@mui/material": "^5.9.2",
     "@navjobs/upload": "^3.2.0",
     "@types/axios": "^0.14.0",
+    "antd": "^4.22.7",
     "axios": "^0.27.2",
     "date-fns": "^2.29.1",
     "emoji-mart": "^5.2.0",

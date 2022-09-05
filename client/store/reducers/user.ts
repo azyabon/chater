@@ -7,6 +7,7 @@ const initialState = {
 export default (state = initialState, { type, payload }: any) => {
   switch (type) {
     case "USER:SET_DATA":
+      console.log(payload);
       return {
         ...state,
         data: payload,

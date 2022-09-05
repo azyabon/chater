@@ -15,8 +15,6 @@ export interface IMessage extends Document {
     default: boolean;
   };
 }
-//TODO: сделать массив с файлами аттач
-//attachments:
 
 const MessageSchema = new Schema(
   {
@@ -34,10 +32,11 @@ const MessageSchema = new Schema(
       type: String,
       required: Boolean,
     },
-    unread: {
+    isRead: {
       type: Boolean,
       default: false,
     },
+    attachments: [{ type: Schema.Types.ObjectId, ref: "File" }],
   },
   {
     timestamps: true,

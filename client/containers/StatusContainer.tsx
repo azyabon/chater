@@ -10,18 +10,15 @@ type Props = {
 };
 
 const StatusContainer: FC<Props> = ({ currentDialogId, dialogs, user }) => {
-  if ((dialogs && !dialogs.length) || !currentDialogId) {
-    return null;
-  }
-  const currentDialogObj =
-    dialogs &&
-    dialogs.filter((dialog: any) => dialog._id === currentDialogId)[0];
+  const currentDialogObj = dialogs?.filter(
+    (dialog: any) => dialog._id === currentDialogId
+  )[0];
   let partner: any = {};
 
-  if (currentDialogObj && user && currentDialogObj.author._id === user._id) {
-    partner = currentDialogObj.partner;
+  if (currentDialogObj?.author._id === user?._id) {
+    partner = currentDialogObj?.partner;
   } else {
-    partner = currentDialogObj && currentDialogObj.author;
+    partner = currentDialogObj?.author;
   }
 
   return <Status online={partner.isOnline} fullName={partner.fullName} />;

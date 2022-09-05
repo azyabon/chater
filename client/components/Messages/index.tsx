@@ -3,15 +3,20 @@ import { FC } from "react";
 import Image from "next/image";
 import Message from "../Message";
 import { ThreeCircles } from "react-loader-spinner";
+import { IMessage, IUser } from "../../types/types";
 
 type Props = {
-  items?: any;
+  items?: IMessage[];
   isLoading: boolean;
-  user: any;
+  user: IUser;
   removeMessage: any;
 };
 
 const Messages: FC<Props> = ({ items, isLoading, user, removeMessage }) => {
+  console.log(items);
+  if (!items?.length) {
+    return <></>;
+  }
   return (
     <S.Messages>
       {isLoading ? (
@@ -32,20 +37,17 @@ const Messages: FC<Props> = ({ items, isLoading, user, removeMessage }) => {
             ariaLabel="three-circles-rotating"
           />
         </div>
-      ) : items && !isLoading ? (
-        items.map((item: any) => (
+      ) : (
+        items.map((item: IMessage) => (
           <Message
+            isTyping={false}
             key={item._id}
+            date={item.createdAt}
             {...item}
             isMe={user._id === item.user._id}
             removeMessage={removeMessage.bind(this, item._id)}
           />
         ))
-      ) : (
-        <S.NoMessages>
-          <Image src={"/nomessage.png"} alt={"nodata"} width={64} height={64} />
-          <span>Откройте диалог</span>
-        </S.NoMessages>
       )}
     </S.Messages>
   );

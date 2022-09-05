@@ -6,6 +6,7 @@ export const CurrentDialog = styled.div`
   height: 100%;
 `;
 export const CurrentDialogHeader = styled.header`
+  position: relative;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -47,5 +48,50 @@ export const CurrentDialogChat = styled.div`
   ::-webkit-scrollbar-thumb {
     background-color: #bbbbbb;
     border-radius: 12px;
+  }
+`;
+export const CurrentDialogMenu = styled.div<{ show: boolean }>`
+  display: ${({ show }) => (show ? "flex" : "none")};
+  flex-direction: column;
+  position: absolute;
+  right: 25px;
+  top: 33px;
+  background-color: #fff;
+  box-shadow: 0 0 4px black;
+  border-radius: 4px;
+  z-index: 9999;
+  span {
+    display: inline-block;
+    padding: 5px 10px;
+    text-align: center;
+    width: 100%;
+    font-size: 16px;
+    border-bottom: 1px solid black;
+    font-weight: 600;
+    line-height: 20px;
+    :last-of-type {
+      border-bottom: 0;
+    }
+
+    &:hover {
+      background-color: #87adff;
+      cursor: pointer;
+      color: #fff;
+    }
+  }
+`;
+export const NoDialog = styled.div`
+  width: 100%;
+  height: 90vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  opacity: 0.2;
+  margin-top: 60px;
+  span {
+    font-size: 14px;
+    font-weight: 600;
+    margin-top: 10px;
   }
 `;
