@@ -33,12 +33,9 @@ const CurrentDialog = ({ currentDialogId, setCurrentDialogId }: Props) => {
             <S.CurrentDialogUser>
               <StatusContainer />
             </S.CurrentDialogUser>
-            <div
-              onClick={() => setOption(true)}
-              style={{ minWidth: "20px", cursor: "pointer" }}
-            >
+            <S.OptionContainer onClick={() => setOption(true)}>
               <Image src={"/option.png"} width={20} height={20} />
-            </div>
+            </S.OptionContainer>
             <S.CurrentDialogMenu
               show={option}
               onMouseLeave={() => setOption(false)}

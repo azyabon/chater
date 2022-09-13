@@ -28,6 +28,12 @@ export const ChatInput = styled.div`
     }
   }
 `;
+export const EmojiContainer = styled.div`
+  position: absolute;
+  bottom: 26px;
+  left: 30px;
+  cursor: pointer;
+`;
 export const Emoji = styled.div`
   position: absolute;
   top: -435px;
@@ -36,4 +42,18 @@ export const Emoji = styled.div`
     opacity: 1;
   }
   margin-bottom: 30px;
+`;
+export const UploadContainer = styled.div`
+  position: absolute;
+  bottom: 24px;
+  right: 55px;
+  cursor: pointer;
+  width: 25px;
+  height: 25px;
+`;
+export const SendButtonOrAudioContainer = styled.div`
+  position: absolute;
+  bottom: 26px;
+  right: 30px;
+  cursor: pointer;
 `;

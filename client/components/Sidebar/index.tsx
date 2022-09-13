@@ -4,6 +4,7 @@ import DialogsContainer from "../../containers/DialogsContainer";
 import { FC, FormEvent } from "react";
 import Select from "react-select";
 import { ThreeCircles } from "react-loader-spinner";
+import CurrentUser from "../CurrentUser";
 
 type Props = {
   user: any;
@@ -49,7 +50,7 @@ const Sidebar: FC<Props> = ({
           <S.SidebarIcon>
             <Image src={"/social.png"} alt={"social"} width={18} height={18} />
           </S.SidebarIcon>
-          <span>Список диалогов</span>
+          <span>List of dialogues</span>
         </div>
         <S.SidebarIconEdit onClick={() => toggleModal(true)}>
           <Image src={"/editing.png"} alt={"editing"} width={18} height={18} />
@@ -86,11 +87,11 @@ const Sidebar: FC<Props> = ({
             createDialog();
           }}
         >
-          <S.ModalTitle>Создание диалога</S.ModalTitle>
+          <S.ModalTitle>Creating a dialogue</S.ModalTitle>
           <hr />
           <S.ModalOverview>
-            Выберите пользователя с которым хотите начать диалог просто нажав на
-            него.
+            Select the user with whom you want to start a dialogue by simply
+            clicking on it.
           </S.ModalOverview>
           <Select
             inputValue={inputValue}
@@ -103,18 +104,19 @@ const Sidebar: FC<Props> = ({
               onSearch(text);
               setInputValue(text);
             }}
-            placeholder="Имя или email"
+            placeholder="Username or email"
           />
           <S.ModalMessage
             value={messageValue}
             onChange={(e) => setMessageValue(e.target.value)}
-            placeholder="Введите первое сообщение..."
+            placeholder="Enter your first message..."
           />
-          <S.Submit disabled={!messageValue || !selected}>СОЗДАТЬ</S.Submit>
+          <S.Submit disabled={!messageValue || !selected}>CREATE</S.Submit>
         </form>
       </S.Modal>
       <S.SidebarDialogs>
         <DialogsContainer userId={user && user._id} />
+        <CurrentUser user={user} />
       </S.SidebarDialogs>
     </S.Sidebar>
   );

@@ -47,7 +47,7 @@ const Registr: FC<Props> = ({ fetchUserRegister }) => {
         {success ? (
           <S.Confirm>
             <Image src={"/info.png"} width={40} height={40} />
-            <h2 style={{ marginTop: "1rem" }}>Verify your account</h2>
+            <h2>Verify your account</h2>
             <p>An email has been sent to your email to verify your account</p>
             <S.LoginLink
               style={{

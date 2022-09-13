@@ -59,8 +59,10 @@ export const DialogInfoBottom = styled.div`
   display: flex;
   align-items: center;
   p {
+    flex: 1;
     opacity: 0.5;
     font-size: 14px;
+    line-height: 15px;
     text-overflow: ellipsis;
     overflow: hidden;
     width: 200px;

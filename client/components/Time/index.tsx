@@ -1,5 +1,5 @@
 import distanceInWordsToNow from "date-fns/formatDistanceToNow";
-import ruLocale from "date-fns/locale/ru";
+import enUS from "date-fns/locale/en-US";
 import { FC } from "react";
 
 import * as S from "./Time.styled";
@@ -14,7 +14,7 @@ const Time: FC<Props> = ({ date, isMe }) => {
     <S.Time isMe={isMe}>
       {distanceInWordsToNow(date, {
         addSuffix: true,
-        locale: ruLocale,
+        locale: enUS,
       })}
     </S.Time>
   );

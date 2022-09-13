@@ -37,7 +37,7 @@ const Dialogs: FC<Props> = ({
         <S.DialogsInput
           onChange={onSearch}
           value={inputValue}
-          placeholder="Поиск среди контактов"
+          placeholder="Search among interlocutors"
         ></S.DialogsInput>
       </S.DialogsSearch>
       {items.length ? (

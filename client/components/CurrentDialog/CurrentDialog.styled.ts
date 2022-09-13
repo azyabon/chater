@@ -95,3 +95,7 @@ export const NoDialog = styled.div`
     margin-top: 10px;
   }
 `;
+export const OptionContainer = styled.div`
+  min-width: 20px;
+  cursor: pointer;
+`;

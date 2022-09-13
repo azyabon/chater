@@ -45,6 +45,7 @@ export const Confirm = styled.div`
     font-size: 2rem;
     font-weight: 700;
     margin-bottom: 1rem;
+    margin-top: 1rem;
   }
   p {
     font-size: 1.2rem;

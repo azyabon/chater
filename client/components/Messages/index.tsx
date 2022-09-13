@@ -20,15 +20,7 @@ const Messages: FC<Props> = ({ items, isLoading, user, removeMessage }) => {
   return (
     <S.Messages>
       {isLoading ? (
-        <div
-          style={{
-            height: "80vh",
-            width: "100%",
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
-          }}
-        >
+        <S.MessagesLoaderContainer>
           <ThreeCircles
             height="120"
             width="120"
@@ -36,7 +28,7 @@ const Messages: FC<Props> = ({ items, isLoading, user, removeMessage }) => {
             visible={true}
             ariaLabel="three-circles-rotating"
           />
-        </div>
+        </S.MessagesLoaderContainer>
       ) : (
         items.map((item: IMessage) => (
           <Message

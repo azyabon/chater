@@ -29,6 +29,7 @@ export const SidebarIconEdit = styled.div`
   }
 `;
 export const SidebarDialogs = styled.div`
+  position: relative;
   overflow: auto;
   height: calc(100% - 66px);
 

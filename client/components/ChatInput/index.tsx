@@ -6,7 +6,6 @@ import { UploadField } from "@navjobs/upload";
 import data from "@emoji-mart/data";
 // @ts-ignore
 import Picker from "@emoji-mart/react";
-import UploadFiles from "../UploadFiles";
 
 type Props = {
   onSendMessage: any;
@@ -26,13 +25,7 @@ const ChatInput: FC<Props> = ({ onSendMessage, currentDialogId }) => {
 
   return (
     <S.ChatInput>
-      <div
-        style={{
-          position: "absolute",
-          bottom: 26,
-          left: 30,
-          cursor: "pointer",
-        }}
+      <S.EmojiContainer
         onMouseEnter={() => setEmoji(true)}
         onMouseLeave={() => setEmoji(false)}
       >
@@ -46,17 +39,8 @@ const ChatInput: FC<Props> = ({ onSendMessage, currentDialogId }) => {
           </S.Emoji>
         ) : null}
         <Image src={"/smile.png"} width={20} height={20} alt={"smile"} />
-      </div>
-      <div
-        style={{
-          position: "absolute",
-          bottom: 24,
-          right: 55,
-          cursor: "pointer",
-          width: 25,
-          height: 25,
-        }}
-      >
+      </S.EmojiContainer>
+      <S.UploadContainer>
         <UploadField
           onFiles={(files: any) => console.log(1)}
           uploadProps={{
@@ -66,28 +50,21 @@ const ChatInput: FC<Props> = ({ onSendMessage, currentDialogId }) => {
         >
           <Image src={"/photo.png"} width={20} height={20} alt={"photo"} />
         </UploadField>
-      </div>
-      <div
-        style={{
-          position: "absolute",
-          bottom: 26,
-          right: 30,
-          cursor: "pointer",
-        }}
-      >
+      </S.UploadContainer>
+      <S.SendButtonOrAudioContainer>
         {value.length !== 0 ? (
           <Image src={"/send.png"} width={20} height={20} alt={"send"} />
         ) : (
           <Image src={"/mic.png"} width={20} height={20} alt={"mic"} />
         )}
-      </div>
+      </S.SendButtonOrAudioContainer>
       <input
         value={value}
         onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
           setValue(e.target.value)
         }
         onKeyUp={(e) => handleSendMessage(e.keyCode)}
-        placeholder="Введите текст..."
+        placeholder="Enter text..."
       />
     </S.ChatInput>
   );
