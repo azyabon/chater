@@ -153,11 +153,7 @@ const Message: FC<Props> = ({
               )}
             </S.MessageBubble>
           )}
-          {date ? (
-            <Time date={Date.parse(date.toString())} isMe={isMe} />
-          ) : (
-            <p style={{ height: 12 }}></p>
-          )}
+          <Time date={Date.parse(date.toString())} isMe={isMe} />
         </div>
         <MessageStatus
           style={{ margin: "0 10px 25px 10px" }}
